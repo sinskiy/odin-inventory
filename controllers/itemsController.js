@@ -25,8 +25,14 @@ const editItemPost = [
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      // TODO: normal error handling
-      res.status("402").redirect("/");
+      const itemQueryResults = await db.getItemById(req.params.itemId);
+      const item = itemQueryResults.rows[0];
+      const { rows } = await db.getAllCategories();
+      return res.status(400).render("edit-item", {
+        item,
+        categories: rows,
+        errors: errors.array(),
+      });
     }
     const { name, price, categoryId } = req.body;
     const id = req.params.itemId;

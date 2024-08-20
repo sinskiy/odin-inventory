@@ -28,8 +28,10 @@ const editCategoryPost = [
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      // TODO: normal error handling
-      res.status("402").redirect("/");
+      const { rows } = await db.getCategoryById(req.params.categoryId);
+      return res
+        .status(400)
+        .render("edit-category", { category: rows[0], errors: errors.array() });
     }
     const { name } = req.body;
     const id = req.params.categoryId;

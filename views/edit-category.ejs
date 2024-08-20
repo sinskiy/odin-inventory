@@ -8,6 +8,7 @@
     <%- include('partials/header') %>
     <main>
       <% if (locals.category) { %>
+      <%- include("partials/errors.ejs") %>
       <form action="" method="post" class="form">
         <h2>edit category</h2>
         <div class="input-field">
