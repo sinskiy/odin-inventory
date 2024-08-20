@@ -10,8 +10,8 @@
       <section class="items">
         <% items.forEach(item => { %>
         <article class="item">
-          <h2 class="name"><%= item.name %></h2>
           <p class="price"><%= item.price_cents / 100 %>$</p>
+          <h2 class="name"><%= item.name %></h2>
         </article>
         <% }) %>
       </section>
