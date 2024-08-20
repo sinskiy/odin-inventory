@@ -1,3 +1,4 @@
+const { body, validationResult } = require("express-validator");
 const db = require("../db/queries");
 
 async function categoriesGet(req, res) {
@@ -12,4 +13,41 @@ async function categoryGet(req, res) {
   res.render("items", { items: items.rows, category: category.rows[0]?.name });
 }
 
-module.exports = { categoriesGet, categoryGet };
+async function editCategoryGet(req, res) {
+  const { rows } = await db.getCategoryById(req.params.categoryId);
+  res.render("edit-category", { category: rows[0] });
+}
+
+const validateCategory = [
+  body("name")
+    .isLength({ min: 1, max: 16 })
+    .withMessage("Category must be between 1 and 16 characters"),
+];
+const editCategoryPost = [
+  validateCategory,
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      // TODO: normal error handling
+      res.status("402").redirect("/");
+    }
+    const { name } = req.body;
+    const id = req.params.categoryId;
+    await db.updateCategory(id, { name });
+    res.redirect("/categories");
+  },
+];
+
+async function deleteCategoryPost(req, res) {
+  const id = req.params.categoryId;
+  await db.deleteCategory(id);
+  res.redirect("/categories");
+}
+
+module.exports = {
+  categoriesGet,
+  categoryGet,
+  editCategoryGet,
+  editCategoryPost,
+  deleteCategoryPost,
+};

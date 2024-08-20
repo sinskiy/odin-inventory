@@ -19,7 +19,10 @@ CREATE TABLE IF NOT EXISTS categories (
   id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   name VARCHAR (64) NOT NULL,
   price_cents INTEGER NOT NULL,
-  category_id INTEGER REFERENCES categories(id)
+  category_id INTEGER,
+  FOREIGN KEY(category_id)
+    REFERENCES categories(id)
+    ON DELETE CASCADE
 );
   `,
   ...items.map(() => {

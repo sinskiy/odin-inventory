@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <%- include('partials/head', { title: `Edit ${locals.category ? locals.category.name : 'category'}` }) %>
+    <link rel="stylesheet" href="/form.css" />
+  </head>
+  <body>
+    <%- include('partials/header') %>
+    <main>
+      <% if (locals.category) { %>
+      <form action="" method="post" class="form">
+        <h2>edit category</h2>
+        <div class="input-field">
+          <label for="name">name</label>
+          <input
+            value="<%= category.name %>"
+            class="styled"
+            type="text"
+            id="name"
+            name="name"
+          />
+        </div>
+        <button class="styled primary" type="submit">submit</button>
+      </form>
+      <form
+        style="margin-top: 2rem"
+        action="/categories/<%= category.id %>/delete"
+        method="post"
+      >
+        <h2 style="margin-bottom: 1rem">dangerous</h2>
+        <button class="styled error" type="submit">delete</button>
+      </form>
+      <% } else { %>
+      <%- include('partials/error') %>
+      <% } %>
+    </main>
+  </body>
+</html>

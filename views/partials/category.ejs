@@ -1,4 +1,7 @@
 <article class="category">
   <h2 class="name"><%= category.name %></h2>
-  <a class="styled link" href="/categories/<%= category.id %>">open</a>
+  <div style="display: flex">
+    <a class="styled link" href="/categories/<%= category.id %>">open</a>
+    <a class="styled link" href="/categories/<%= category.id %>/edit">manage</a>
+  </div>
 </article>
