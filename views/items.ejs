@@ -8,6 +8,7 @@
     <%- include('partials/header') %>
     <main>
       <section>
+        <% if (items.length > 0) { %>
         <ul class="items" role="list">
           <% items.forEach(item => { %>
           <li>
@@ -15,6 +16,9 @@
           </li>
           <% }) %>
         </ul>
+        <% } else { %>
+        <h1>no items</h1>
+        <% } %>
       </section>
     </main>
   </body>

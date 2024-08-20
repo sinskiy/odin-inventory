@@ -8,6 +8,7 @@
     <%- include('partials/header') %>
     <main>
       <section>
+        <% if (categories.length > 0) { %>
         <ul class="categories" role="list">
           <% categories.forEach(category => { %>
           <li>
@@ -15,6 +16,9 @@
           </li>
           <% }) %>
         </ul>
+        <% } else { %>
+        <h1>no categories</h1>
+        <% } %>
       </section>
     </main>
   </body>
