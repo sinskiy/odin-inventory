@@ -92,7 +92,7 @@ button.styled {
 a.styled {
   display: inline-block;
   width: fit-content;
-  padding: 1rem;
+  padding: 0.5rem 0.5rem 0.5rem 0;
 
   color: var(--primary);
   font-weight: 500;

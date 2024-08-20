@@ -20,3 +20,12 @@
   font-size: 2rem;
   font-weight: 500;
 }
+.item [aria-label="category"] {
+  width: fit-content;
+  padding: 0rem 1rem;
+  margin-left: 0.5rem;
+
+  background-color: var(--primary);
+  color: var(--on-primary);
+  border-radius: var(--rounded);
+}
