@@ -1,21 +1,36 @@
 const { body, validationResult } = require("express-validator");
 const db = require("../db/queries");
 
-async function categoriesGet(req, res) {
-  const { rows } = await db.getAllCategories();
-  res.render("categories", { categories: rows });
+async function categoriesGet(req, res, next) {
+  try {
+    const { rows } = await db.getAllCategories();
+    res.render("categories", { categories: rows });
+  } catch (error) {
+    next(error);
+  }
 }
 
-async function categoryGet(req, res) {
+async function categoryGet(req, res, next) {
   const { categoryId } = req.params;
-  const items = await db.getItemsByCategory(categoryId);
-  const category = await db.getCategoryById(categoryId);
-  res.render("items", { items: items.rows, category: category.rows[0]?.name });
+  try {
+    const items = await db.getItemsByCategory(categoryId);
+    const category = await db.getCategoryById(categoryId);
+    res.render("items", {
+      items: items.rows,
+      category: category.rows[0]?.name,
+    });
+  } catch (error) {
+    next(error);
+  }
 }
 
-async function editCategoryGet(req, res) {
-  const { rows } = await db.getCategoryById(req.params.categoryId);
-  res.render("edit-category", { category: rows[0] });
+async function editCategoryGet(req, res, next) {
+  try {
+    const { rows } = await db.getCategoryById(req.params.categoryId);
+    res.render("edit-category", { category: rows[0] });
+  } catch (error) {
+    next();
+  }
 }
 
 const validateCategory = [
@@ -25,7 +40,7 @@ const validateCategory = [
 ];
 const editCategoryPost = [
   validateCategory,
-  async (req, res) => {
+  async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       const { rows } = await db.getCategoryById(req.params.categoryId);
@@ -35,15 +50,23 @@ const editCategoryPost = [
     }
     const { name } = req.body;
     const id = req.params.categoryId;
-    await db.updateCategory(id, { name });
-    res.redirect("/categories");
+    try {
+      await db.updateCategory(id, { name });
+      res.redirect("/categories");
+    } catch (error) {
+      next(error);
+    }
   },
 ];
 
-async function deleteCategoryPost(req, res) {
+async function deleteCategoryPost(req, res, next) {
   const id = req.params.categoryId;
-  await db.deleteCategory(id);
-  res.redirect("/categories");
+  try {
+    await db.deleteCategory(id);
+    res.redirect("/categories");
+  } catch (error) {
+    next(error);
+  }
 }
 
 module.exports = {

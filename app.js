@@ -12,6 +12,11 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/categories", categoriesRouter);
 app.use("/()(items)?", itemsRouter);
 
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(500).send(err.message);
+});
+
 app.listen(process.env.PORT, () =>
   console.log(`http://${process.env.HOSTNAME}:${process.env.PORT}`),
 );
