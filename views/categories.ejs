@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <%- include('partials/head', { title: "Categories" }) %>
+    <link rel="stylesheet" href="categories.css" />
+  </head>
+  <body>
+    <%- include('partials/header') %>
+    <main>
+      <section>
+        <ul class="categories" role="list">
+          <% categories.forEach(category => { %>
+          <li>
+            <%- include('partials/category', { category }) %>
+          </li>
+          <% }) %>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>

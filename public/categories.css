@@ -1,10 +1,10 @@
-.items {
+.categories {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 1rem;
 }
 
-.item {
+.category {
   display: grid;
   padding: 2rem;
   height: 100%;
@@ -12,11 +12,7 @@
   background-color: var(--surface);
   border-radius: var(--rounded-card);
 }
-.item .name {
-  font-size: 1rem;
-  font-weight: 400;
-}
-.item .price {
+.category .name {
   font-size: 2rem;
   font-weight: 500;
 }
