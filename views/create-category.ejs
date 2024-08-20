@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <%- include('partials/head', { title: `Create ${locals.category ? locals.category.name : 'category'}` }) %>
+    <link rel="stylesheet" href="/form.css" />
+  </head>
+  <body>
+    <%- include('partials/header') %>
+    <main>
+      <%- include("partials/errors.ejs") %>
+      <form action="" method="post" class="form">
+        <h2>create category</h2>
+        <div class="input-field">
+          <label for="name">name</label>
+          <input class="styled" type="text" id="name" name="name" />
+        </div>
+        <button class="styled primary" type="submit">submit</button>
+      </form>
+    </main>
+  </body>
+</html>

@@ -21,6 +21,13 @@ async function updateItem(id, { name, price, categoryId }) {
   );
 }
 
+async function insertItem({ name, price, categoryId }) {
+  return await pool.query(
+    "INSERT INTO items (name, price_cents, category_id) VALUES ($1, $2, $3)",
+    [name, price, categoryId],
+  );
+}
+
 async function deleteItem(id) {
   return await pool.query("DELETE FROM items WHERE id = $1", [id]);
 }
@@ -40,6 +47,10 @@ async function updateCategory(id, { name }) {
   ]);
 }
 
+async function insertCategory({ name }) {
+  return await pool.query("INSERT INTO categories (name) VALUES ($1)", [name]);
+}
+
 async function deleteCategory(id) {
   return await pool.query("DELETE FROM categories WHERE id = $1", [id]);
 }
@@ -49,9 +60,11 @@ module.exports = {
   getItemsByCategory,
   getItemById,
   updateItem,
+  insertItem,
   deleteItem,
   getAllCategories,
   getCategoryById,
   updateCategory,
+  insertCategory,
   deleteCategory,
 };

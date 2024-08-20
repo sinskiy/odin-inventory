@@ -59,6 +59,29 @@ const editCategoryPost = [
   },
 ];
 
+async function createCategoryGet(req, res) {
+  res.render("create-category");
+}
+
+const createCategoryPost = [
+  validateCategory,
+  async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res
+        .status(400)
+        .render("create-category", { errors: errors.array() });
+    }
+    const { name } = req.body;
+    try {
+      await db.insertCategory({ name });
+      res.redirect("/categories");
+    } catch (error) {
+      next(error);
+    }
+  },
+];
+
 async function deleteCategoryPost(req, res, next) {
   const id = req.params.categoryId;
   try {
@@ -74,5 +97,7 @@ module.exports = {
   categoryGet,
   editCategoryGet,
   editCategoryPost,
+  createCategoryGet,
+  createCategoryPost,
   deleteCategoryPost,
 };

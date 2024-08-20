@@ -46,7 +46,33 @@ const editItemPost = [
     const id = req.params.itemId;
     try {
       await db.updateItem(id, { name, price, categoryId });
-      res.redirect("/");
+      res.redirect("/items");
+    } catch (error) {
+      next(error);
+    }
+  },
+];
+
+async function createItemGet(req, res) {
+  const { rows } = await db.getAllCategories();
+  res.render("create-item", { categories: rows });
+}
+
+const createItemPost = [
+  validateItem,
+  async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      const { rows } = await db.getAllCategories();
+      return res.status(400).render("create-item", {
+        categories: rows,
+        errors: errors.array(),
+      });
+    }
+    const { name, price, categoryId } = req.body;
+    try {
+      await db.insertItem({ name, price, categoryId });
+      res.redirect("/items");
     } catch (error) {
       next(error);
     }
@@ -57,10 +83,17 @@ async function deleteItemPost(req, res, next) {
   const id = req.params.itemId;
   try {
     await db.deleteItem(id);
-    res.redirect("/");
+    res.redirect("/items");
   } catch (error) {
-    next(erorr);
+    next(error);
   }
 }
 
-module.exports = { itemsGet, editItemGet, editItemPost, deleteItemPost };
+module.exports = {
+  itemsGet,
+  editItemGet,
+  editItemPost,
+  createItemGet,
+  createItemPost,
+  deleteItemPost,
+};

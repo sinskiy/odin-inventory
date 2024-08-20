@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <%- include('partials/head', { title: `Create ${locals.item ? locals.item.name : 'item'}` }) %>
+    <link rel="stylesheet" href="/form.css" />
+  </head>
+  <body>
+    <%- include('partials/header') %>
+    <main>
+      <%- include("partials/errors.ejs") %>
+      <form action="" method="post" class="form">
+        <h2>create item</h2>
+        <div class="input-field">
+          <label for="name">name</label>
+          <input class="styled" type="text" id="name" name="name" />
+        </div>
+        <div class="input-field">
+          <label for="price">price <em>(in cents)</em></label>
+          <input class="styled" type="number" id="price" name="price" />
+        </div>
+        <div class="input-field">
+          <label for="categoryId">category</label>
+          <select class="styled" name="categoryId" id="categoryId">
+            <% if (categories) { categories.forEach(category => { %>
+            <option value="<%= category.id %>"><%= category.name %></option>
+            <% }) %>
+            <% } %>
+          </select>
+        </div>
+        <button class="styled primary" type="submit">submit</button>
+      </form>
+    </main>
+  </body>
+</html>

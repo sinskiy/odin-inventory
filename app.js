@@ -10,7 +10,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/categories", categoriesRouter);
-app.use("/()(items)?", itemsRouter);
+app.use("/()?(items)?", itemsRouter);
 
 app.use((err, req, res, next) => {
   console.error(err);
