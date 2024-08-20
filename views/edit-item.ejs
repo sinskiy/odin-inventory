@@ -31,8 +31,8 @@
           />
         </div>
         <div class="input-field">
-          <label for="category">category</label>
-          <select class="styled" name="category" id="category">
+          <label for="categoryId">category</label>
+          <select class="styled" name="categoryId" id="categoryId">
             <% if (categories) { categories.forEach(category => { %>
             <option value="<%= category.id %>"><%= category.name %></option>
             <% }) %>
