@@ -2,18 +2,19 @@
 <html lang="en">
   <head>
     <%- include('partials/head', { title: "Items" }) %>
+    <link rel="stylesheet" href="items.css" />
   </head>
   <body>
-    <header>
-      <a class="logo styled" href="/">buyFlags</a>
-      <ul role="list">
-        <li>
-          <a class="styled" href="/">items</a>
-        </li>
-        <li>
-          <a class="styled" href="/categories">categories</a>
-        </li>
-      </ul>
-    </header>
+    <%- include('partials/header') %>
+    <main>
+      <section class="items">
+        <% items.forEach(item => { %>
+        <article class="item">
+          <h2 class="name"><%= item.name %></h2>
+          <p class="price"><%= item.price_cents / 100 %>$</p>
+        </article>
+        <% }) %>
+      </section>
+    </main>
   </body>
 </html>
