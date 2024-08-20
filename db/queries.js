@@ -10,6 +10,10 @@ async function getItemsByCategory(categoryId) {
   ]);
 }
 
+async function getItemById(itemId) {
+  return await pool.query("SELECT * FROM items WHERE id = $1", [itemId]);
+}
+
 async function getAllCategories() {
   return await pool.query("SELECT * FROM categories");
 }
@@ -21,6 +25,7 @@ async function getCategoryById(id) {
 module.exports = {
   getAllItems,
   getItemsByCategory,
+  getItemById,
   getAllCategories,
   getCategoryById,
 };

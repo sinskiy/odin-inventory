@@ -10,7 +10,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/categories", categoriesRouter);
-app.use("/", itemsRouter);
+app.use("/()(items)?", itemsRouter);
 
 app.listen(process.env.PORT, () =>
   console.log(`http://${process.env.HOSTNAME}:${process.env.PORT}`),

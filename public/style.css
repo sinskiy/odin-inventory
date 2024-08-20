@@ -7,6 +7,8 @@
   --outline: #7a7768;
   --primary: #656015;
   --on-primary: #ffffff;
+  --error: #ba1a1a;
+  --on-error: #ffffff;
 
   --rounded: 9999px;
   --rounded-card: 1rem;
@@ -76,6 +78,10 @@ a:active,
   background-color: var(--primary);
   color: var(--on-primary);
 }
+.styled.error {
+  background-color: var(--error);
+  color: var(--on-error);
+}
 button.styled {
   width: fit-content;
   padding: 0.75rem 2rem;
@@ -124,5 +130,7 @@ header .logo {
     --outline: #949181;
     --primary: #d0c973;
     --on-primary: #353200;
+    --error: #ffb4ab;
+    --on-error: #690005;
   }
 }

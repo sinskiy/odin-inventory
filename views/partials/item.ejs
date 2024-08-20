@@ -1,4 +1,9 @@
 <article class="item">
+  <small
+    >id
+    <%= item.id %></small
+  >
   <p class="price"><%= item.price_cents / 100 %>$</p>
   <h2 class="name"><%= item.name %></h2>
+  <a class="styled" href="/items/<%= item.id %>">edit</a>
 </article>

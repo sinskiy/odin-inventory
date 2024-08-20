@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <%- include('partials/head', { title: `Edit ${locals.item ? locals.item.name : 'item'}` }) %>
+    <link rel="stylesheet" href="/form.css" />
+  </head>
+  <body>
+    <%- include('partials/header') %>
+    <main>
+      <% if (locals.item) { %>
+      <form action="" method="post" class="form">
+        <h2>edit item</h2>
+        <div class="input-field">
+          <label for="name">name</label>
+          <input
+            value="<%= item.name %>"
+            class="styled"
+            type="text"
+            id="name"
+            name="name"
+          />
+        </div>
+        <div class="input-field">
+          <label for="price">price <em>(in cents)</em></label>
+          <input
+            value="<%= item.price_cents %>"
+            class="styled"
+            type="number"
+            id="price"
+            name="price"
+          />
+        </div>
+        <div class="input-field">
+          <label for="category">category</label>
+          <select class="styled" name="category" id="category">
+            <% if (categories) { categories.forEach(category => { %>
+            <option value="<%= category.id %>"><%= category.name %></option>
+            <% }) %>
+            <% } %>
+          </select>
+        </div>
+        <button class="styled primary" type="submit">submit</button>
+      </form>
+      <form
+        style="margin-top: 2rem"
+        action="/items/<%= item.id %>/delete"
+        method="post"
+      >
+        <h2 style="margin-bottom: 1rem">dangerous</h2>
+        <button class="styled error" type="submit">delete</button>
+      </form>
+      <% } else { %>
+      <%- include('partials/error') %>
+      <% } %>
+    </main>
+  </body>
+</html>
