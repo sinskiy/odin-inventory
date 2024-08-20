@@ -110,6 +110,9 @@ header ul {
   display: flex;
   flex-wrap: wrap;
 }
+header .logo {
+  font-size: 2rem;
+}
 
 /* dark mode variables */
 @media screen and (prefers-color-scheme: dark) {
